@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>自动展开</title>
+    <style type="text/css">
+    body {
+        margin: 0 auto;
+        padding: 0;
+    }
+    
+    a:focus {
+        outline: none;
+    }
+    
+    #pn {
+        background: #e8e8e8;
+        height: 120px;
+        width: auto;
+        display: block;
+        margin: 0 auto;
+        padding: 5px;
+        text-align: center;
+        overflow: hidden;
+    }
+    
+    .slide {
+        padding: 10px;
+        width: 960px;
+        margin: 0 auto;
+        background: gray;
+        text-align: center;
+        height: 40px;
+        line-height: 40px;
+        color: #fff;
+    }
+    </style>
+    <script>
+    var timer = null;
+    //增加高度函数addH()
+    var h = 0;
+    function addh() {
+        clearInterval(timer);
+        if (h < 120) {
+            timer = setInterval(function() {
+                h += 2;
+                document.getElementById('pn').style.height = h + 'px';
+            }, 30);
+        } else {
+            clearInterval(timer);
+        }
+    }
+    //网页加载完毕时，调用增加高度函数addH()，等待5秒钟后调用减少高度函数subh()。 
+    window.onload = function() {
+        addh();
+        setTimeout('subh()', 5000);
+    }
+    // 减少高度函数subH()
+    function subh() {
+        if (h > 0) {
+            timer = setInterval(function() {
+                h -= 5;
+                document.getElementById('pn').style.height = h + 'px';
+            }, 30);
+        } else {
+            document.getElementById('pn').style.display = 'none';
+            clearInterval(timer);
+        }
+    }
+    </script>
+</head>
+<body>
+    <div id="pn">
+        <h1>
+            欢迎来到慕课网</h1>
+        <h2>
+            大幅广告</h2>
+    </div>
+    <p class="slide">
+        慕课网欢迎你</p>
+</body>
+</html>
